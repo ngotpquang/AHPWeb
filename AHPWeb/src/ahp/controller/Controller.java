@@ -39,6 +39,8 @@ public class Controller extends HttpServlet {
 		String[] criteriaList;
 		String[] choiceList;
 		Matrix[] choiceMatrixList;
+		float[] listCR;
+		String temp = "";
 		HttpSession session = request.getSession();
 		String act = (String) request.getParameter("act");
 		if (act == null) {
@@ -75,12 +77,17 @@ public class Controller extends HttpServlet {
 			float data[][] = new float[col][col];
 			for (int i = 0; i < col; i++) {
 				for (int j = 0; j < col; j++) {
-					data[i][j] = Float.parseFloat(request.getParameter("" + i + j));
+					temp = request.getParameter("" + i + j);
+					if (!temp.contains("/")){
+						data[i][j] = Float.parseFloat(temp);
+					} else {
+						data[i][j] = Utilities.stringToFloat(temp);
+					}
+					
 				}
 			}
 			Matrix criteriaEigenMatrix = (new Matrix(data, col, col)).eigenMatrix();
 			session.setAttribute("criteriaEigenMatrix", criteriaEigenMatrix);
-			System.out.println("criteriaEigenMatrix\n" + criteriaEigenMatrix.toString());
 			request.getRequestDispatcher("/WEB-INF/ChoiceName.jsp").include(request, response);
 			break;
 		case "enterChoiceMatrix":
@@ -92,20 +99,29 @@ public class Controller extends HttpServlet {
 				float data1[][] = new float[numOfChoices][numOfChoices];
 				for (int i = 0; i < numOfChoices; i++) {
 					for (int j = 0; j < numOfChoices; j++) {
-						data1[i][j] = Float.parseFloat(request.getParameter(criteriaList[k] + i + j));
-						System.out.println(data1[i][j]);
+						temp = request.getParameter(criteriaList[k] + i + j);
+						if (!temp.contains("/")){
+							data1[i][j] = Float.parseFloat(temp);
+						} else {
+							data1[i][j] = Utilities.stringToFloat(temp);
+						}
 					}
 				}
 				choiceMatrixList[k] = new Matrix(data1, numOfChoices, numOfChoices);
 			}
-			for (int i = 0; i < choiceMatrixList.length; i++) {
-				System.out.println("Matrix choices:\n" + choiceMatrixList[i].toString());
+			listCR = new float[numOfCriterias];
+			for (int i = 0; i < numOfCriterias; i++){
+				listCR[i] = Utilities.calculateCR(choiceMatrixList[i], choiceMatrixList[i].eigenMatrix());
 			}
 			Matrix choiceMatrixAfter = Utilities.createMatrix(choiceMatrixList);
-			System.out.println("Choice matrix after:\n" + choiceMatrixAfter.toString());
-			session.setAttribute("choiceMatrixAfter", choiceMatrixAfter);
+			criteriaEigenMatrix = (Matrix) session.getAttribute("criteriaEigenMatrix");
+			request.setAttribute("criteriaEigenMatrix", criteriaEigenMatrix);
+			request.setAttribute("choiceMatrixAfter", choiceMatrixAfter);
+			request.setAttribute("listCR", listCR);
 			request.getRequestDispatcher("/WEB-INF/Result.jsp").include(request, response);
 			break;
+		case "home":
+			response.sendRedirect("index.jsp");
 		default:
 			request.getRequestDispatcher("/WEB-INF/Error.jsp").include(request, response);
 			break;

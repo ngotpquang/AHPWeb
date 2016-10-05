@@ -4,9 +4,11 @@
 	pageEncoding="UTF-8"%>
 <%
 	int numOfCriterias = (int) session.getAttribute("numOfCriterias");
-	Matrix criteriaEigenMatrix = (Matrix) session.getAttribute("criteriaEigenMatrix");
-	Matrix choiceMatrixAfter = (Matrix) session.getAttribute("choiceMatrixAfter");
+	Matrix criteriaEigenMatrix = (Matrix) request.getAttribute("criteriaEigenMatrix");
+	Matrix choiceMatrixAfter = (Matrix) request.getAttribute("choiceMatrixAfter");
 	String[] choiceList = (String[]) session.getAttribute("choiceList");
+	String[] criteriaList = (String[]) session.getAttribute("criteriaList");
+	float[] listCR = (float[]) request.getAttribute("listCR");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -38,73 +40,69 @@
 				<h3>Phương pháp AHP - Kết quả</h3>
 			</div>
 			<div class="panel-body">
-				<p>ChoiceMatrixAfter</p>
+				<label>Chỉ số thích hợp của các tiêu chí</label>
 				<%
-					for (int i = 0; i < choiceMatrixAfter.getNumOfRows(); i++) {
+					for (int i = 0; i < listCR.length; i++) {
 				%>
 				<div class="row">
-					<%
-						for (int j = 0; j < choiceMatrixAfter.getNumOfCols(); j++) {
-					%>
-					<div class="col-sm-1">
-						<input class="form-control" type="text"
-							value="<%=Utilities.formatDecimal(choiceMatrixAfter.getData()[i][j])%>" disabled>
+					<div class="col-sm-2">
+						<label><%=criteriaList[i]%>:</label>
 					</div>
-					<%
-						}
-					%>
+					<div class="col-sm-2">
+						<%
+							if (listCR[i] < 0.1) {
+						%>
+						<b style="color: green;"><%=Utilities.formatDecimal(listCR[i])%></b>
+						<%
+							} else {
+						%>
+						<b style="color: red;"><%=Utilities.formatDecimal(listCR[i])%></b>
+						<%
+							}
+						%>
+					</div>
 				</div>
-				<br />
 				<%
 					}
 				%>
-				
-				<p>CriteriaEigenMatrix</p>
+				<hr>
+				<label>Kết quả</label>
 				<%
-					for (int i = 0; i < criteriaEigenMatrix.getNumOfRows(); i++) {
-				%>
-				<div class="row">
-					<%
-						for (int j = 0; j < criteriaEigenMatrix.getNumOfCols(); j++) {
-					%>
-					<div class="col-sm-1">
-						<input class="form-control" type="text"
-							value="<%=Utilities.formatDecimal(criteriaEigenMatrix.getData()[i][j])%>" disabled>
-					</div>
-					<%
-						}
-					%>
-				</div>
-				<br />
-				<%
-					}
-				%>
-				
-				
-				<p>Result</p>
-				<%	
 					Matrix result = Matrix.mutiply(choiceMatrixAfter, criteriaEigenMatrix);
 					for (int i = 0; i < result.getNumOfRows(); i++) {
 				%>
 				<div class="row">
 					<div class="col-sm-2">
-						<input class="form-control" type="text" value="<%=choiceList[i] %>" disabled>
+						<label><%=choiceList[i]%>:</label>
 					</div>
 					<%
 						for (int j = 0; j < result.getNumOfCols(); j++) {
 					%>
-					<div class="col-sm-1">
-						<input class="form-control" type="text"
-							value="<%=Utilities.formatDecimal(result.getData()[i][j])%>" disabled>
+					<div class="col-sm-4">
+						<%
+							if (result.getData()[i][j] < Utilities.getMaxInMatrixData(result)) {
+						%>
+						<b style="color: blue;"><%=Utilities.formatDecimal(result.getData()[i][j])%></b>
+						<%
+							} else {
+						%>
+						<b style="color: violet;"><%=Utilities.formatDecimal(result.getData()[i][j])%>
+							(Chọn phương án này)</b>
+						<%
+							}
+						%>
 					</div>
 					<%
 						}
 					%>
 				</div>
-				<br />
 				<%
 					}
 				%>
+				<hr>
+				<div class="col-sm-offset-5 col-sm-2">
+					<a href="Controller?act=home" type="button" class="btn btn-primary">Trang chủ</a>
+				</div>
 			</div>
 		</div>
 	</div>

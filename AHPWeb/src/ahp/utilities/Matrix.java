@@ -113,33 +113,12 @@ public class Matrix {
 		Matrix m3 = Utilities.readFromFile("a3.txt");
 		Matrix m4 = Utilities.readFromFile("a4.txt");
 		Matrix c = Utilities.readFromFile("c.txt");
-		// for (int i = 0; i < m1.getNumOfRows(); i++){
-		// System.out.print(Utilities.formatDecimal(m1.eigenvectors()[i]) +
-		// "\t");
-		// }
-		// System.out.println();
-		// for (int i = 0; i < m2.getNumOfRows(); i++){
-		// System.out.print(Utilities.formatDecimal(m2.eigenvectors()[i]) +
-		// "\t");
-		// }
-		// System.out.println();
-		// for (int i = 0; i < m3.getNumOfRows(); i++){
-		// System.out.print(Utilities.formatDecimal(m3.eigenvectors()[i]) +
-		// "\t");
-		// }
-		// System.out.println();
-		// for (int i = 0; i < m4.getNumOfRows(); i++){
-		// System.out.print(Utilities.formatDecimal(m4.eigenvectors()[i]) +
-		// "\t");
-		// }
-		// System.out.println();
-		for (int i = 0; i < c.getNumOfRows(); i++) {
-			System.out.print(Utilities.formatDecimal(c.eigenVector()[i]) + "\t");
-		}
-		System.out.println(c.eigenMatrix().toString());
+		System.out.println("Vector trong so ma tran tieu chi:\n" + c.eigenMatrix().toString());
+		
 		Matrix[] listMatrix = { m1, m2, m3, m4 };
-		System.out.println(Utilities.createMatrix(listMatrix));
+		System.out.println("Chi so nhat quan tieu chi 1: " + Utilities.formatDecimal(Utilities.calculateCR(m1, m1.eigenMatrix())));
+		System.out.println("\nMa tran ket hop:\n" + Utilities.createMatrix(listMatrix));
 		Matrix result = Matrix.mutiply(Utilities.createMatrix(listMatrix), c.eigenMatrix());
-		System.out.println(result);
+		System.out.println("Ket qua lua chon:\n" + result);
 	}
 }
