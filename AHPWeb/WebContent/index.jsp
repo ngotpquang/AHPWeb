@@ -25,9 +25,10 @@
 </head>
 <body>
 	<div class="container" style="margin: 15px auto;">
+	<jsp:include page="/WEB-INF/_header.jsp"></jsp:include>
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3>Phương pháp</h3>
+				<h3>Phương pháp AHP</h3>
 			</div>
 			<div class="panel-body">
 				<form action="Controller" method="get">
@@ -46,6 +47,7 @@
 				</form>
 			</div>
 		</div>
+		<jsp:include page="/WEB-INF/_footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>

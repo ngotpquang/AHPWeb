@@ -29,7 +29,7 @@
 </head>
 <body>
 	<div class="container" style="margin: 15px auto;">
-		<div class="panel panel-primary">
+		<div class="panel panel-warning">
 			<div class="panel-heading">
 				<h3>Phương pháp AHP - Tên các tiêu chí</h3>
 			</div>
@@ -55,6 +55,7 @@
 				</form>
 			</div>
 		</div>
+		<jsp:include page="_footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>

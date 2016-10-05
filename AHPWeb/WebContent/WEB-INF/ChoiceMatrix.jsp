@@ -33,18 +33,20 @@
 </head>
 <body>
 	<div class="container" style="margin: 15px auto;">
-		<div class="panel panel-primary">
+		<div class="panel panel-danger">
 			<div class="panel-heading">
 				<h3>Phương pháp AHP - Ma trận các phương án lựa chọn</h3>
 			</div>
 			<div class="panel-body">
 				<form action="Controller" method="get">
 					<input type="hidden" name="act" value="enterChoiceMatrix">
-					<%	for (int k = 0; k < numOfCriterias; k++) {%>
+					<%
+						for (int k = 0; k < numOfCriterias; k++) {
+					%>
 					<!-- <%=k%> -->
 					<!-- <%=criteriaList[k]%> -->
 					<div class="row">
-						<div class="col-sm-1"><%=criteriaList[k] %></div>
+						<div class="col-sm-1"><%=criteriaList[k]%></div>
 						<%
 							for (int i = 0; i < numOfChoices; i++) {
 						%>
@@ -82,7 +84,9 @@
 						}
 					%>
 					<hr>
-					<%} %>
+					<%
+						}
+					%>
 					<div class="col-sm-offset-8 col-sm-2">
 						<input class="btn btn-default" type="reset" value="Xóa hết">
 					</div>
@@ -92,6 +96,7 @@
 				</form>
 			</div>
 		</div>
+		<jsp:include page="_footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>

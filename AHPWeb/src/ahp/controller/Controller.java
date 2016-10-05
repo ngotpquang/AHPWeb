@@ -12,7 +12,11 @@ import ahp.utilities.Matrix;
 import ahp.utilities.Utilities;
 
 /**
- * Servlet implementation class HomePage
+ * Servlet implementation class Controller
+ */
+/**
+ * @author Quang Ngo TP
+ *
  */
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {

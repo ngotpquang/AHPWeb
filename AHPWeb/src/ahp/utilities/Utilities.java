@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
+/**
+ * @author Quang Ngo TP
+ *
+ */
 public class Utilities {
 	public static float[] listOfN = { 0.0f, 0.0f, 0.0f, 0.58f, 0.90f, 1.12f, 1.24f, 1.32f, 1.41f };
 

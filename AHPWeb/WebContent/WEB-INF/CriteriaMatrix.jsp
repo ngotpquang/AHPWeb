@@ -30,7 +30,7 @@
 </head>
 <body>
 	<div class="container" style="margin: 15px auto;">
-		<div class="panel panel-primary">
+		<div class="panel panel-success">
 			<div class="panel-heading">
 				<h3>Phương pháp AHP - Ma trận các tiêu chí</h3>
 			</div>
@@ -43,19 +43,21 @@
 							for (int i = 0; i < numOfCriterias; i++) {
 						%>
 						<div class="col-sm-1">
-							<input type="text" class="form-control" value="<%=criteriaList[i]%>" disabled>
+							<input type="text" class="form-control"
+								value="<%=criteriaList[i]%>" disabled>
 						</div>
 						<%
 							}
 						%>
 					</div>
-					<br/>
+					<br />
 					<%
 						for (int i = 0; i < numOfCriterias; i++) {
 					%>
 					<div class="row">
 						<div class="col-sm-1">
-							<input type="text" class="form-control" value="<%=criteriaList[i]%>" disabled>
+							<input type="text" class="form-control"
+								value="<%=criteriaList[i]%>" disabled>
 						</div>
 						<%
 							for (int j = 0; j < numOfCriterias; j++) {
@@ -82,6 +84,7 @@
 				</form>
 			</div>
 		</div>
+		<jsp:include page="_footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>

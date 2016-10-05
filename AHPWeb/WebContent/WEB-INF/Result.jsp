@@ -101,10 +101,12 @@
 				%>
 				<hr>
 				<div class="col-sm-offset-5 col-sm-2">
-					<a href="Controller?act=home" type="button" class="btn btn-primary">Trang chủ</a>
+					<a href="Controller?act=home" type="button" class="btn btn-primary">Trang
+						chủ</a>
 				</div>
 			</div>
 		</div>
+		<jsp:include page="_footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>

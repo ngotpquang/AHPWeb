@@ -1,5 +1,9 @@
 package ahp.utilities;
 
+/**
+ * @author Quang Ngo TP
+ *
+ */
 public class Matrix {
 	private float[][] data;
 	private int numOfRows, numOfCols;
